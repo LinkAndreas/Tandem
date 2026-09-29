@@ -1,0 +1,16 @@
+name: tandem
+
+services:
+  tandem:
+    # Built by GitHub Actions (.github/workflows/deploy.yml); TAG is the commit SHA of the deploy.
+    image: ghcr.io/linkandreas/tandem:${TAG:-latest}
+    container_name: tandem
+    # No published ports: the cloudflared container on the `web` network reaches it at
+    # http://tandem:32774 and serves it (with HTTPS) at the domain.
+    networks:
+      - web
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true

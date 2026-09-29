@@ -1,0 +1,39 @@
+# Serves the exported website on port 32774 (plain HTTP). HTTPS and the domain are handled by the
+# Cloudflare Tunnel in front of it on the VPS.
+{
+	admin off
+	auto_https off
+	persist_config off
+}
+
+:32774 {
+	root * /srv
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+		-Server
+	}
+
+	# Next's hashed bundles never change; images revalidate weekly; pages always revalidate.
+	@hashed path /_next/static/*
+	header @hashed Cache-Control "public, max-age=31536000, immutable"
+	@images path *.svg *.ico
+	header @images Cache-Control "public, max-age=604800"
+	# Page URLs have no extension (/) or end in .html.
+	@pages path_regexp (^[^.]*$|\.html$)
+	header @pages Cache-Control "no-cache"
+
+	# The export writes pages as <name>.html, like GitHub Pages resolved them.
+	try_files {path} {path}.html {path}/index.html
+	file_server
+
+	# Unknown paths get the site's 404 page with a real 404 status.
+	handle_errors 404 {
+		rewrite * /404.html
+		file_server
+	}
+}
