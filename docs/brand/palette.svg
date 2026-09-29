@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 96" width="640" height="96" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12">
+  <title>Tandem colors</title>
+  <rect x="0" y="0" width="152" height="64" rx="12" fill="#2f5d50"/>
+  <rect x="162" y="0" width="152" height="64" rx="12" fill="#f6f2eb" stroke="#e2dacb"/>
+  <rect x="324" y="0" width="152" height="64" rx="12" fill="#f3d9cc"/>
+  <rect x="486" y="0" width="152" height="64" rx="12" fill="#1f1d1a"/>
+  <text x="0" y="86" fill="#6b665c">Forest · #2F5D50</text>
+  <text x="162" y="86" fill="#6b665c">Cream · #F6F2EB</text>
+  <text x="324" y="86" fill="#6b665c">Peach · #F3D9CC</text>
+  <text x="486" y="86" fill="#6b665c">Ink · #1F1D1A</text>
+</svg>
