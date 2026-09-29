@@ -4,67 +4,66 @@
 
 # Tandem
 
-**Jede Runde ein neues Gegenüber.**
+**Someone new every round.**
 
-Für Teams, die sich gegenseitig Feedback geben: Tandem teilt die Feedback-Partner ein –<br>
-Runde für Runde, ohne dass sich ein Paar wiederholt.
+For teams that give each other feedback: Tandem assigns the feedback partners –<br>
+round after round, without ever repeating a pair.
 
 [![Deploy](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml/badge.svg)](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml)
-![Version](https://img.shields.io/badge/version-1.0.1-2f5d50)
-[![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-2f5d50)](LICENSE)
+![Version](https://img.shields.io/badge/version-1.0.2-2f5d50)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2f5d50)](LICENSE)
 <br>
 ![Next.js](https://img.shields.io/badge/Next.js-16-1f1d1a?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-1f1d1a?logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-1f1d1a?logo=typescript&logoColor=3178C6)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-1f1d1a?logo=tailwindcss&logoColor=06B6D4)
-![Sprachen](https://img.shields.io/badge/Sprachen-DE_·_EN_·_FR_·_ES-f3d9cc)
-![Kein Backend](https://img.shields.io/badge/Daten-bleiben_im_Browser-f3d9cc)
+![Languages](https://img.shields.io/badge/languages-DE_·_EN_·_FR_·_ES-f3d9cc)
+![No backend](https://img.shields.io/badge/data-stays_in_your_browser-f3d9cc)
 
 </div>
 
-## Funktionen
+## Features
 
-- **Gruppe anlegen** – Namen einzeln eintragen oder eine ganze Liste (z. B. aus Excel oder einer
-  E-Mail) auf einmal einfügen.
-- **Bisherige Runden nachtragen** – Paare per Antippen bilden oder alle Runden auf einmal als Text
-  eingeben.
-- **Neue Runde auslosen** – findet immer eine Einteilung ohne Wiederholung, sofern es noch eine gibt.
-  Bei ungerader Gruppengröße setzt reihum eine Person aus.
-- **Teilen** – Paare einer Runde kopieren oder alle Runden als PDF herunterladen, inklusive einer
-  Übersicht, wer mit wem in welcher Runde ein Paar gebildet hat.
-- **Sitzungen speichern und laden** – Gruppe und Runden als Datei sichern, etwa um auf einem anderen
-  Gerät weiterzumachen oder mehrere Teams zu verwalten.
-- **Beispiel ansehen** – eine Beispielgruppe mit acht Runden zum Ausprobieren; die eigenen Daten
-  bleiben dabei unberührt.
-- **Rückgängig** – Löschen, Zurücksetzen und Laden lassen sich direkt wieder rückgängig machen.
-- **Deutsch, Englisch, Französisch, Spanisch** sowie helles und dunkles Design.
+- **Set up your group** – add names one by one or paste a whole list (e.g. from Excel or an email)
+  at once.
+- **Add past rounds** – pair people by tapping their names or enter all rounds at once as text.
+- **Draw a new round** – always finds an arrangement without repeated pairs, as long as one exists.
+  With an odd group size, people take turns sitting out.
+- **Share** – copy the pairs of a round or download all rounds as a PDF, including an overview of
+  who was paired with whom in each round.
+- **Save and load sessions** – save the group and rounds as a file, e.g. to continue on another
+  device or to manage several teams.
+- **See an example** – a sample group with eight rounds to try things out; your own data stays
+  untouched.
+- **Undo** – deleting, starting over and loading can be undone right away.
+- **German (default), English, French and Spanish**, plus a light and a dark theme.
 
-## Textformat für Runden
+## Text format for rounds
 
-Über „Runden als Text bearbeiten“ lassen sich viele Runden schnell eintragen:
+“Edit rounds as text” lets you enter many rounds quickly:
 
 ```text
-Runde 1
+Round 1
 Anna M. & Ben K.
 Clara S. & David L.
 
-Runde 2
+Round 2
 Anna M. & Clara S.
 Ben K. & David L.
 Emil R.
 ```
 
-- Ein Paar pro Zeile, Namen mit `&` trennen (`+`, `,`, `;`, `/` und ` - ` funktionieren auch).
-- Eine Leerzeile oder eine Überschrift wie „Runde 2“ (auch „Round“, „Tour“, „Ronda“ oder `#`)
-  beginnt die nächste Runde.
-- Steht nur ein Name in der Zeile, setzt diese Person in der Runde aus.
-- Unbekannte Namen werden automatisch zur Gruppe hinzugefügt.
+- One pair per line, names separated by `&` (`+`, `,`, `;`, `/` and ` - ` work too).
+- A blank line or a heading such as “Round 2” (also “Runde”, “Tour”, “Ronda” or `#`) starts the
+  next round.
+- A line with a single name means that person sits out that round.
+- Names are matched case-insensitively; new names are added to the group automatically.
 
-## Datenschutz und Speicherung
+## Privacy and storage
 
-Tandem ist eine rein statische Web-App ohne Backend und ohne Konto. Gruppe, Runden und Einstellungen
-liegen nur im `localStorage` des jeweiligen Browsers; es werden keine Daten an einen Server
-übertragen. Gespeicherte Sitzungen sind JSON-Dateien, die nur lokal erzeugt und gelesen werden:
+Tandem is a purely static web app without a backend or accounts. The group, rounds and settings are
+kept only in the browser’s `localStorage`; no data is sent to a server. Saved sessions are JSON
+files that are created and read locally:
 
 ```json
 {
@@ -76,86 +75,87 @@ liegen nur im `localStorage` des jeweiligen Browsers; es werden keine Daten an e
 }
 ```
 
-## Marke
+## Brand
 
-**Name:** Tandem – zwei Menschen, die gemeinsam in eine Richtung arbeiten. Das Wort gibt es auf Deutsch,
-Englisch, Französisch und Spanisch, daher braucht die Marke keine Übersetzung.
+**Name:** Tandem – two people working together towards the same goal. The word exists in German,
+English, French and Spanish, so the brand needs no translation.
 
-**Claim:** „Jede Runde ein neues Gegenüber.“ (EN: „Someone new every round.“)
+**Claim:** “Someone new every round.” (DE: „Jede Runde ein neues Gegenüber.“)
 
-**Logo:** Zwei überlappende Kreise stehen für ein Paar. Dateien: [`docs/brand/mark.svg`](docs/brand/mark.svg)
-(freistehend) und [`src/app/icon.svg`](src/app/icon.svg) (App-Icon mit Hintergrund).
+**Logo:** Two overlapping circles represent a pair. Files: [`docs/brand/mark.svg`](docs/brand/mark.svg)
+(standalone) and [`src/app/icon.svg`](src/app/icon.svg) (app icon with background).
 
-<img src="docs/brand/palette.svg" alt="Farbpalette: Forest #2F5D50, Cream #F6F2EB, Peach #F3D9CC, Ink #1F1D1A" width="640">
+<img src="docs/brand/palette.svg" alt="Color palette: Forest #2F5D50, Cream #F6F2EB, Peach #F3D9CC, Ink #1F1D1A" width="640">
 
-| Rolle | Farbe | Hell | Dunkel |
+| Role | Color | Light | Dark |
 | --- | --- | --- | --- |
-| Akzent (Buttons, Links) | Forest | `#2F5D50` | `#8CC3AD` |
-| Hintergrund | Cream | `#F6F2EB` | `#141311` |
-| Logo, Personenfarben | Peach | `#F3D9CC` | `#4A2A1D` |
+| Accent (buttons, links) | Forest | `#2F5D50` | `#8CC3AD` |
+| Background | Cream | `#F6F2EB` | `#141311` |
+| Logo, person colors | Peach | `#F3D9CC` | `#4A2A1D` |
 | Text | Ink | `#1F1D1A` | `#EFEBE4` |
 
-Alle Farben inklusive der acht Personenfarben für die Initialen-Kreise sind als CSS-Variablen in
-[`src/app/globals.css`](src/app/globals.css) definiert.
+All colors, including the eight person colors for the initials, are defined as CSS variables in
+[`src/app/globals.css`](src/app/globals.css).
 
-**Schrift:** Überschriften in [Fraunces](https://fonts.google.com/specimen/Fraunces) (Serif, 500/600),
-Fließtext in der Systemschrift. Im PDF wird Helvetica verwendet.
+**Typography:** Headings in [Fraunces](https://fonts.google.com/specimen/Fraunces) (serif, 500/600),
+body text in the system font. The PDF uses Helvetica.
 
-**Tonalität:** klar, freundlich und kurz; im Deutschen mit „Sie“, im Französischen mit „vous“,
-im Spanischen mit „tú“.
+**Tone of voice:** clear, friendly and short; formal address in German (“Sie”) and French (“vous”),
+informal in Spanish (“tú”).
 
-## Entwicklung
+## Development
 
-Voraussetzung ist Node.js 22 (wie im Docker-Build).
+Requires Node.js 22 (as in the Docker build).
 
 ```bash
-npm run bootstrap   # Abhängigkeiten installieren
-npm run dev         # Dev-Server auf http://localhost:3000
+npm run bootstrap   # install dependencies
+npm run dev         # dev server at http://localhost:3000
 npm run lint        # ESLint
-npm run build       # statischer Export nach out/
+npm run build       # static export to out/
 ```
 
-Das Projekt nutzt Next.js (App Router, `output: 'export'`), React 19, Tailwind CSS 4 und jsPDF.
-Den Dev-Server kann man auch vom Smartphone im lokalen Netz aufrufen (`allowedDevOrigins` in
+Built with Next.js (App Router, `output: 'export'`), React 19, Tailwind CSS 4 and jsPDF. The dev
+server can also be opened from a phone on the local network (`allowedDevOrigins` in
 `next.config.ts`).
 
-| Pfad | Inhalt |
+| Path | Contents |
 | --- | --- |
-| `src/components/` | Oberfläche: Gruppe, Runden, Dialoge, Einstellungen |
-| `src/app/pairing_algorithm.tsx` | Auslosung per Backtracking-Suche ohne wiederholte Paare |
-| `src/lib/i18n.ts` | Alle Texte in vier Sprachen |
-| `src/lib/pdf.ts` | PDF-Export |
-| `src/lib/roundText.ts` | Textformat für Runden |
-| `src/lib/session.ts` | Sitzungsdateien speichern und laden |
-| `src/lib/sample.ts` | Beispieldaten |
+| `src/components/` | UI: group, rounds, dialogs, settings |
+| `src/app/pairing_algorithm.tsx` | Drawing rounds via backtracking search without repeated pairs |
+| `src/lib/i18n.ts` | All texts in four languages |
+| `src/lib/pdf.ts` | PDF export |
+| `src/lib/roundText.ts` | Text format for rounds |
+| `src/lib/session.ts` | Saving and loading session files |
+| `src/lib/sample.ts` | Example data |
 
 ## Deployment
 
-Jeder Push auf `main` startet `.github/workflows/deploy.yml`:
+Every push to `main` runs `.github/workflows/deploy.yml`:
 
-1. GitHub Actions baut das Docker-Image – statischer Next.js-Export, ausgeliefert von Caddy – und
-   pusht es nach `ghcr.io/linkandreas/tandem`, getaggt mit dem Commit-SHA.
-2. Der Hostinger-VPS erhält nur `compose.yaml` in `~/tandem`, zieht das Image und
-   startet den Container neu.
+1. GitHub Actions builds the Docker image – a static Next.js export served by Caddy – and pushes it
+   to `ghcr.io/linkandreas/tandem`, tagged with the commit SHA.
+2. The Hostinger VPS only receives `compose.yaml` in `~/tandem`, pulls the image and restarts the
+   container.
 
-Der Container veröffentlicht keine Ports, sondern hängt im Docker-Netzwerk `web`. Der
-`cloudflared`-Container erreicht ihn dort unter `http://tandem:32774` und stellt
-ihn per Cloudflare Tunnel mit HTTPS unter der Domain bereit.
+The container publishes no ports; it joins the Docker network `web`, where the `cloudflared`
+container reaches it at `http://tandem:32774` and serves it with HTTPS at the domain via a
+Cloudflare Tunnel.
 
-Benötigte Repository-Secrets: `HOSTINGER_HOST`, `HOSTINGER_USERNAME`, `HOSTINGER_SSH_KEY`.
+Required secrets (repository or `production` environment): `HOSTINGER_HOST`, `HOSTINGER_USERNAME`,
+`HOSTINGER_SSH_KEY`.
 
-**Rollback** auf dem VPS:
+**Roll back** on the VPS:
 
 ```bash
-cd ~/tandem && TAG=<älterer Commit-SHA> docker compose up -d
+cd ~/tandem && TAG=<older commit SHA> docker compose up -d
 ```
 
-**Docker-Image lokal testen** (danach unter <http://localhost:32774> erreichbar):
+**Test the Docker image locally** (then available at <http://localhost:32774>):
 
 ```bash
 docker build -t tandem . && docker run --rm -p 32774:32774 tandem
 ```
 
-## Lizenz
+## License
 
 [MIT](LICENSE) © 2026 Andreas Link
