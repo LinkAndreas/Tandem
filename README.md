@@ -10,7 +10,7 @@ For teams that give each other feedback: Tandem assigns the feedback partners â€
 round after round, without ever repeating a pair.
 
 [![Deploy](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml/badge.svg)](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml)
-![Version](https://img.shields.io/badge/version-1.0.1-2f5d50)
+![Version](https://img.shields.io/badge/version-1.0.2-2f5d50)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2f5d50)](LICENSE)
 <br>
 ![Next.js](https://img.shields.io/badge/Next.js-16-1f1d1a?logo=nextdotjs&logoColor=white)
