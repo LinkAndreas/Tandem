@@ -10,7 +10,7 @@ Für Teams, die sich gegenseitig Feedback geben: Tandem teilt die Feedback-Partn
 Runde für Runde, ohne dass sich ein Paar wiederholt.
 
 [![Deploy](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml/badge.svg)](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml)
-![Version](https://img.shields.io/badge/version-1.0.0-2f5d50)
+![Version](https://img.shields.io/badge/version-1.0.1-2f5d50)
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-2f5d50)](LICENSE)
 <br>
 ![Next.js](https://img.shields.io/badge/Next.js-16-1f1d1a?logo=nextdotjs&logoColor=white)
