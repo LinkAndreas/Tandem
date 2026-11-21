@@ -32,7 +32,7 @@ export default function SettingsMenu() {
           <circle cx="10" cy="10" r="7.5" />
           <path d="M2.5 10h15M10 2.5c2 2.2 2.8 4.7 2.8 7.5s-.8 5.3-2.8 7.5c-2-2.2-2.8-4.7-2.8-7.5s.8-5.3 2.8-7.5Z" />
         </svg>
-        <span aria-hidden="true" className="uppercase sm:hidden">{locale}</span>
+        <span aria-hidden="true" className="uppercase sm:hidden">{locale.split("-")[0]}</span>
         <span aria-hidden="true" className="hidden sm:inline">{LOCALE_NAMES[locale]}</span>
         <svg viewBox="0 0 20 20" className="size-3.5 text-muted" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="m6 8 4 4 4-4" />

@@ -3,6 +3,9 @@
  */
 const nextConfig = {
   output: 'export',
+  // Pages end in a slash (/privacy/de/), like the developer's other sites; the export writes
+  // each page as <path>/index.html.
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
