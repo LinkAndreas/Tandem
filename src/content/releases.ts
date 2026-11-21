@@ -8,6 +8,67 @@ export type Release = { version: string; /** Year and month, YYYY-MM. */ date: s
 
 export const releases: Release[] = [
   {
+    version: "1.1.0",
+    date: "2026-11",
+    notes: {
+      de: [
+        "Tandem spricht jetzt elf Sprachen: neu sind Italienisch, Portugiesisch (Brasilien), Niederländisch, Japanisch, Koreanisch, Chinesisch (vereinfacht) und Russisch. Beim ersten Öffnen startet Tandem in der Sprache deines Browsers.",
+        "PDFs zeigen jetzt auch kyrillische, japanische, koreanische und chinesische Namen richtig an.",
+        "Impressum, Datenschutzerklärung und Versionshistorie, verlinkt unten auf der Seite.",
+      ],
+      en: [
+        "Tandem now speaks eleven languages: Italian, Portuguese (Brazil), Dutch, Japanese, Korean, Chinese (Simplified) and Russian are new. On first launch, Tandem opens in your browser's language.",
+        "PDFs now show Cyrillic, Japanese, Korean and Chinese names correctly.",
+        "A legal notice, privacy policy and version history, linked at the bottom of the page.",
+      ],
+      fr: [
+        "Tandem parle désormais onze langues : l’italien, le portugais (Brésil), le néerlandais, le japonais, le coréen, le chinois (simplifié) et le russe sont nouveaux. À la première ouverture, Tandem s’affiche dans la langue de ton navigateur.",
+        "Les PDF affichent désormais correctement les noms en cyrillique, en japonais, en coréen et en chinois.",
+        "Mentions légales, politique de confidentialité et historique des versions, accessibles en bas de la page.",
+      ],
+      es: [
+        "Tandem ahora habla once idiomas: se suman el italiano, el portugués (Brasil), el neerlandés, el japonés, el coreano, el chino (simplificado) y el ruso. La primera vez, Tandem se abre en el idioma de tu navegador.",
+        "Los PDF ahora muestran correctamente los nombres en cirílico, japonés, coreano y chino.",
+        "Aviso legal, política de privacidad e historial de versiones, enlazados al final de la página.",
+      ],
+      it: [
+        "Tandem ora parla undici lingue: si aggiungono italiano, portoghese (Brasile), olandese, giapponese, coreano, cinese (semplificato) e russo. Al primo avvio, Tandem si apre nella lingua del tuo browser.",
+        "I PDF ora mostrano correttamente i nomi in cirillico, giapponese, coreano e cinese.",
+        "Note legali, informativa sulla privacy e cronologia versioni, con i link in fondo alla pagina.",
+      ],
+      "pt-BR": [
+        "O Tandem agora fala onze idiomas: italiano, português (Brasil), holandês, japonês, coreano, chinês (simplificado) e russo são novos. Na primeira vez, o Tandem abre no idioma do seu navegador.",
+        "Os PDFs agora mostram corretamente nomes em cirílico, japonês, coreano e chinês.",
+        "Aviso legal, Política de Privacidade e histórico de versões, com links no fim da página.",
+      ],
+      nl: [
+        "Tandem spreekt nu elf talen: Italiaans, Portugees (Brazilië), Nederlands, Japans, Koreaans, Chinees (vereenvoudigd) en Russisch zijn nieuw. Bij de eerste keer opent Tandem in de taal van je browser.",
+        "Pdf’s tonen nu ook Cyrillische, Japanse, Koreaanse en Chinese namen correct.",
+        "Juridische informatie, privacybeleid en versiegeschiedenis, gelinkt onderaan de pagina.",
+      ],
+      ja: [
+        "Tandemが11の言語に対応しました。イタリア語、ポルトガル語（ブラジル）、オランダ語、日本語、韓国語、中国語（簡体字）、ロシア語が新たに加わりました。初めて開くときは、ブラウザの言語で表示されます。",
+        "PDFでキリル文字、日本語、韓国語、中国語の名前も正しく表示されるようになりました。",
+        "法的表示、プライバシーポリシー、バージョン履歴へのリンクをページ下部に追加しました。",
+      ],
+      ko: [
+        "Tandem이 이제 11개 언어를 지원해요. 이탈리아어, 포르투갈어(브라질), 네덜란드어, 일본어, 한국어, 중국어(간체), 러시아어가 새로 추가됐어요. 처음 열면 브라우저 언어로 시작해요.",
+        "PDF에서 키릴 문자, 일본어, 한국어, 중국어 이름도 올바르게 표시돼요.",
+        "페이지 아래쪽에 법적 고지, 개인정보 처리방침, 버전 기록 링크가 생겼어요.",
+      ],
+      "zh-Hans": [
+        "Tandem 现在支持 11 种语言：新增意大利语、葡萄牙语（巴西）、荷兰语、日语、韩语、简体中文和俄语。首次打开时，Tandem 会使用你的浏览器语言。",
+        "PDF 现在也能正确显示西里尔文、日文、韩文和中文姓名。",
+        "页面底部新增法律声明、隐私政策和版本历史的链接。",
+      ],
+      ru: [
+        "Tandem теперь говорит на одиннадцати языках: добавлены итальянский, португальский (Бразилия), нидерландский, японский, корейский, китайский (упрощённый) и русский. При первом запуске Tandem открывается на языке твоего браузера.",
+        "PDF теперь правильно показывают имена на кириллице, японском, корейском и китайском.",
+        "Выходные данные, политика конфиденциальности и история версий — ссылки внизу страницы.",
+      ],
+    },
+  },
+  {
     version: "1.0.0",
     date: "2026-09",
     notes: {
