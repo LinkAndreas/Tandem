@@ -129,9 +129,10 @@ const de = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Rechtliches",
+  sourceCode: "Open Source",
   imprintTitle: "Impressum",
   privacyTitle: "Datenschutzerklärung",
-  versionsTitle: "Versionsverlauf",
+  versionsTitle: "Versionshistorie",
   imprintShort: "Impressum",
   privacyShort: "Datenschutz",
   versionsShort: "Versionen",
@@ -274,6 +275,7 @@ const en: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Legal",
+  sourceCode: "Open Source",
   imprintTitle: "Legal Notice",
   privacyTitle: "Privacy Policy",
   versionsTitle: "Version History",
@@ -412,6 +414,7 @@ const fr: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Informations légales",
+  sourceCode: "Open source",
   imprintTitle: "Mentions légales",
   privacyTitle: "Politique de confidentialité",
   versionsTitle: "Historique des versions",
@@ -550,6 +553,7 @@ const es: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Información legal",
+  sourceCode: "Código abierto",
   imprintTitle: "Aviso legal",
   privacyTitle: "Política de privacidad",
   versionsTitle: "Historial de versiones",
@@ -688,6 +692,7 @@ const it: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Note legali",
+  sourceCode: "Open source",
   imprintTitle: "Note legali",
   privacyTitle: "Informativa sulla privacy",
   versionsTitle: "Cronologia versioni",
@@ -826,6 +831,7 @@ const ptBR: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Informações legais",
+  sourceCode: "Código aberto",
   imprintTitle: "Aviso legal",
   privacyTitle: "Política de Privacidade",
   versionsTitle: "Histórico de versões",
@@ -964,6 +970,7 @@ const nl: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Juridisch",
+  sourceCode: "Open source",
   imprintTitle: "Juridische informatie",
   privacyTitle: "Privacybeleid",
   versionsTitle: "Versiegeschiedenis",
@@ -1102,6 +1109,7 @@ const ja: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "法的情報",
+  sourceCode: "オープンソース",
   imprintTitle: "法的表示",
   privacyTitle: "プライバシーポリシー",
   versionsTitle: "バージョン履歴",
@@ -1239,6 +1247,7 @@ const ko: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "법적 정보",
+  sourceCode: "오픈 소스",
   imprintTitle: "법적 고지",
   privacyTitle: "개인정보 처리방침",
   versionsTitle: "버전 기록",
@@ -1376,6 +1385,7 @@ const zhHans: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "法律信息",
+  sourceCode: "开源",
   imprintTitle: "法律声明",
   privacyTitle: "隐私政策",
   versionsTitle: "版本历史",
@@ -1519,6 +1529,7 @@ const ru: Messages = {
 
   // Legal pages (/imprint, /privacy, /versions)
   legalNav: "Правовая информация",
+  sourceCode: "Открытый код",
   imprintTitle: "Выходные данные",
   privacyTitle: "Политика конфиденциальности",
   versionsTitle: "История версий",

@@ -94,6 +94,9 @@ export default function LegalLayout({
               {shortTitles[p]}
             </a>
           ))}
+          <a href="https://github.com/LinkAndreas/Tandem" rel="noopener" className="text-muted underline-offset-4 hover:text-ink hover:underline">
+            {t.sourceCode}
+          </a>
         </nav>
       </footer>
     </>

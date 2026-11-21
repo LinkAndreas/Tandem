@@ -440,6 +440,9 @@ function Planner({ initial, showOnboarding }: { initial: Snapshot; showOnboardin
               {{ imprint: t.imprintShort, privacy: t.privacyShort, versions: t.versionsShort }[page]}
             </a>
           ))}
+          <a href="https://github.com/LinkAndreas/Tandem" target="_blank" rel="noopener" className="underline-offset-4 hover:text-ink hover:underline">
+            {t.sourceCode}
+          </a>
         </nav>
       </footer>
 
