@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import generateNextRound from "@/app/pairing_algorithm";
-import { splitAt } from "@/lib/i18n";
+import { LOCALE_URL_CODES, splitAt } from "@/lib/i18n";
 import { analyzeRounds, createRound, openPairCount, type Pair, type Round } from "@/lib/rounds";
 import { createSample } from "@/lib/sample";
 import { downloadSession, parseSession } from "@/lib/session";
@@ -210,6 +210,9 @@ function Planner({ initial, showOnboarding }: { initial: Snapshot; showOnboardin
     try {
       const { downloadPdf } = await import("@/lib/pdf");
       await downloadPdf({ participants, rounds, analyses, t, locale });
+    } catch (error) {
+      console.error(error);
+      setUndo({ message: t.pdfFailed });
     } finally {
       setIsExporting(false);
     }
@@ -431,6 +434,16 @@ function Planner({ initial, showOnboarding }: { initial: Snapshot; showOnboardin
         <Button variant="danger" onClick={startOver} disabled={!hasData}>
           {t.startOver}
         </Button>
+        <nav aria-label={t.legalNav} className="flex w-full flex-wrap gap-x-5 gap-y-1 pt-3 text-xs text-faint">
+          {(["imprint", "privacy", "versions"] as const).map((page) => (
+            <a key={page} href={`/${page}/${LOCALE_URL_CODES[locale]}/`} className="underline-offset-4 hover:text-ink hover:underline">
+              {{ imprint: t.imprintShort, privacy: t.privacyShort, versions: t.versionsShort }[page]}
+            </a>
+          ))}
+          <a href="https://github.com/LinkAndreas/Tandem" target="_blank" rel="noopener" className="underline-offset-4 hover:text-ink hover:underline">
+            {t.sourceCode}
+          </a>
+        </nav>
       </footer>
 
       <Onboarding open={isOnboardingOpen} onClose={closeOnboarding} onTryExample={enterExample} />
