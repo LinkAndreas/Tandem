@@ -10,14 +10,14 @@ For teams that give each other feedback: Tandem assigns the feedback partners �
 round after round, without ever repeating a pair.
 
 [![Deploy](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml/badge.svg)](https://github.com/LinkAndreas/Tandem/actions/workflows/deploy.yml)
-![Version](https://img.shields.io/badge/version-1.0.2-2f5d50)
+![Version](https://img.shields.io/badge/version-1.1.0-2f5d50)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2f5d50)](LICENSE)
 <br>
 ![Next.js](https://img.shields.io/badge/Next.js-16-1f1d1a?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-1f1d1a?logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-1f1d1a?logo=typescript&logoColor=3178C6)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-1f1d1a?logo=tailwindcss&logoColor=06B6D4)
-![Languages](https://img.shields.io/badge/languages-DE_·_EN_·_FR_·_ES-f3d9cc)
+![Languages](https://img.shields.io/badge/languages-11-f3d9cc)
 ![No backend](https://img.shields.io/badge/data-stays_in_your_browser-f3d9cc)
 
 </div>
@@ -36,7 +36,9 @@ round after round, without ever repeating a pair.
 - **See an example** – a sample group with eight rounds to try things out; your own data stays
   untouched.
 - **Undo** – deleting, starting over and loading can be undone right away.
-- **German (default), English, French and Spanish**, plus a light and a dark theme.
+- **11 languages** – German, English, French, Spanish, Italian, Portuguese (Brazil), Dutch, Japanese,
+  Korean, Chinese (Simplified) and Russian. Tandem starts in the browser’s language (otherwise German);
+  the choice is saved. Plus a light and a dark theme.
 
 ## Text format for rounds
 
@@ -53,9 +55,11 @@ Ben K. & David L.
 Emil R.
 ```
 
-- One pair per line, names separated by `&` (`+`, `,`, `;`, `/` and ` - ` work too).
-- A blank line or a heading such as “Round 2” (also “Runde”, “Tour”, “Ronda” or `#`) starts the
-  next round.
+- One pair per line, names separated by `&` (`+`, `,`, `;`, `/` and ` - ` work too, as do the
+  full-width `＆` `、` `，` `；` `／`).
+- A blank line or a heading such as “Round 2” (or the word for round in any of the app’s languages –
+  “Runde 2”, “Tour 2”, “Ronda 2”, “Turno 2”, “Rodada 2”, “Ronde 2”, “Раунд 2”, “ラウンド 2”, “라운드 2”,
+  “第 2 轮” – or `#`) starts the next round.
 - A line with a single name means that person sits out that round.
 - Names are matched case-insensitively; new names are added to the group automatically.
 
@@ -77,8 +81,8 @@ files that are created and read locally:
 
 ## Brand
 
-**Name:** Tandem – two people working together towards the same goal. The word exists in German,
-English, French and Spanish, so the brand needs no translation.
+**Name:** Tandem – two people working together towards the same goal. The word exists in many
+languages, so the brand needs no translation.
 
 **Claim:** “Someone new every round.” (DE: „Jede Runde ein neues Gegenüber.“)
 
@@ -98,10 +102,16 @@ All colors, including the eight person colors for the initials, are defined as C
 [`src/app/globals.css`](src/app/globals.css).
 
 **Typography:** Headings in [Fraunces](https://fonts.google.com/specimen/Fraunces) (serif, 500/600),
-body text in the system font. The PDF uses Helvetica.
+body text in the system font. The PDF uses Helvetica; when it contains characters Helvetica lacks
+(e.g. Russian, Japanese, Korean or Chinese texts or names), it embeds Noto Sans (Latin, Greek,
+Cyrillic; SIL OFL 1.1) or Droid Sans Fallback (Japanese, Korean, Chinese; Apache 2.0) from
+[`public/fonts/`](public/fonts), loaded only when needed. Droid Sans Fallback has no bold weight
+(bold is simulated) and draws kanji with Chinese-style glyph shapes; scripts such as Arabic or
+emoji are not supported in the PDF.
 
-**Tone of voice:** clear, friendly and short; formal address in German (“Sie”) and French (“vous”),
-informal in Spanish (“tú”).
+**Tone of voice:** clear, friendly and short; informal address in every language – “du”, “tu”, “tú”,
+“tu”, “você”, “je”, “ты”, 해요체 in Korean, “你” in Chinese – and neutral polite (です/ます) in Japanese.
+The legal pages use the same form.
 
 ## Development
 
@@ -122,11 +132,12 @@ server can also be opened from a phone on the local network (`allowedDevOrigins`
 | --- | --- |
 | `src/components/` | UI: group, rounds, dialogs, settings |
 | `src/app/pairing_algorithm.tsx` | Drawing rounds via backtracking search without repeated pairs |
-| `src/lib/i18n.ts` | All texts in four languages |
-| `src/lib/pdf.ts` | PDF export |
+| `src/lib/i18n.ts` | All app texts in 11 languages, language detection |
+| `src/lib/pdf.ts`, `src/lib/pdfFonts.ts` | PDF export, fonts for non-Latin scripts |
 | `src/lib/roundText.ts` | Text format for rounds |
 | `src/lib/session.ts` | Saving and loading session files |
 | `src/lib/sample.ts` | Example data |
+| `src/content/legal/`, `src/content/releases.ts` | Legal Notice, Privacy Policy and version history in all languages (`/imprint/<lang>`, `/privacy/<lang>`, `/versions/<lang>`) |
 
 ## Deployment
 
