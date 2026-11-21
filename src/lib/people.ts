@@ -7,8 +7,12 @@ export function colorIndex(name: string): number {
   return hash % PERSON_COLOR_COUNT;
 }
 
+const CJK = /[\p{Script=Han}\p{Script=Hangul}\p{Script=Hiragana}\p{Script=Katakana}]/u;
+
 export function initials(name: string): string {
   const parts = name.replace(/[^\p{L}\s]/gu, " ").split(/\s+/).filter(Boolean);
   if (parts.length === 0) return "?";
+  // Chinese, Japanese and Korean names: one character – the family name, written first – fits the avatar.
+  if (CJK.test(parts[0][0])) return parts[0][0];
   return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase();
 }

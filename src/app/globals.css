@@ -128,3 +128,30 @@ body {
     transition: none !important;
   }
 }
+
+/* Text of the legal pages (Legal Notice, Privacy Policy, Version History). */
+.legal h2 {
+  @apply mt-7 mb-2 scroll-mt-4 font-display text-xl leading-snug font-semibold;
+}
+.legal p,
+.legal ul {
+  @apply mb-3 leading-relaxed text-ink/85;
+}
+.legal ul {
+  @apply list-disc space-y-1.5 pl-5;
+}
+.legal strong {
+  @apply font-semibold text-ink;
+}
+.legal a {
+  @apply text-accent underline-offset-4 hover:underline;
+}
+.legal .legal-intro {
+  @apply mt-6;
+}
+.legal .legal-summary {
+  @apply rounded-xl bg-accent-soft px-4 py-3 text-ink;
+}
+.legal .legal-meta {
+  @apply mb-2 text-sm text-muted;
+}

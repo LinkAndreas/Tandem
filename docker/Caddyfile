@@ -27,8 +27,9 @@
 	@pages path_regexp (^[^.]*$|\.html$)
 	header @pages Cache-Control "no-cache"
 
-	# The export writes pages as <name>.html, like GitHub Pages resolved them.
-	try_files {path} {path}.html {path}/index.html
+	# The export writes each page as <path>/index.html (trailingSlash in next.config.ts); a
+	# directory path without the slash is redirected to it by file_server.
+	try_files {path} {path}/index.html
 	file_server
 
 	# Unknown paths get the site's 404 page with a real 404 status.

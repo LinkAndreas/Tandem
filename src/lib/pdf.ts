@@ -1,5 +1,6 @@
 import type { jsPDF as JsPDF } from "jspdf";
 import type { Locale, Messages } from "./i18n";
+import { loadPdfFont, type PdfFont } from "./pdfFonts";
 import { colorIndex, initials } from "./people";
 import { pairKey, type Round, type RoundAnalysis } from "./rounds";
 
@@ -42,35 +43,53 @@ export async function downloadPdf({ participants, rounds, analyses, t, locale }:
   const doc = new jsPDF({ unit: "mm", format: "a4" });
   const date = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date());
   doc.setProperties({ title: t.pdfTitle, creator: "Tandem" });
+  const font = await loadPdfFont(doc, [
+    "Tandem …–",
+    date,
+    t.pdfTitle,
+    t.people(participants.length),
+    t.roundsCount(rounds.length),
+    t.round(rounds.length),
+    t.pairsCount(participants.length),
+    t.sitsOutThisRound,
+    t.unassigned(participants),
+    t.pdfByPerson,
+    t.pdfByPersonHint,
+    t.pdfPerson,
+    t.pdfPage(1, 1),
+    t.pdfCreatedWith,
+    ...participants,
+    ...rounds.flatMap((round) => round.pairs.flat()),
+  ]);
 
-  let y = drawTitle(doc, t.pdfTitle, `${t.people(participants.length)} · ${t.roundsCount(rounds.length)} · ${date}`);
+  let y = drawTitle(doc, font, t.pdfTitle, `${t.people(participants.length)} · ${t.roundsCount(rounds.length)} · ${date}`);
   rounds.forEach((round, index) => {
     // Only the latest round lists who is missing; older rounds would list everyone who joined later.
-    y = drawRound(doc, y, index + 1, round, analyses[index], t, index === rounds.length - 1);
+    y = drawRound(doc, font, y, index + 1, round, analyses[index], t, index === rounds.length - 1);
   });
-  if (rounds.length > 0) drawPersonOverview(doc, y, participants, rounds, t);
+  if (rounds.length > 0) drawPersonOverview(doc, font, y, participants, rounds, t);
 
-  drawFooters(doc, t, date);
+  drawFooters(doc, font, t, date);
   doc.save(`${t.pdfFileName}-${new Date().toISOString().slice(0, 10)}.pdf`);
 }
 
-function drawTitle(doc: JsPDF, title: string, meta: string): number {
+function drawTitle(doc: JsPDF, font: PdfFont, title: string, meta: string): number {
   // Brand mark: two overlapping circles, as in the app.
   doc.setFillColor(PERSON_COLORS[0][0]);
   doc.circle(MARGIN + 3, MARGIN + 3, 3, "F");
   doc.setFillColor(ACCENT);
   doc.circle(MARGIN + 6.6, MARGIN + 3, 3, "F");
-  doc.setFont("helvetica", "bold");
+  font.set("bold");
   doc.setFontSize(11);
   doc.setTextColor(INK);
-  doc.text("Tandem", MARGIN + 12, MARGIN + 3, { baseline: "middle" });
+  font.text("Tandem", MARGIN + 12, MARGIN + 3, { baseline: "middle" });
 
   doc.setFontSize(24);
-  doc.text(title, MARGIN, MARGIN + 22);
-  doc.setFont("helvetica", "normal");
+  font.text(title, MARGIN, MARGIN + 22);
+  font.set("normal");
   doc.setFontSize(10);
   doc.setTextColor(MUTED);
-  doc.text(meta, MARGIN, MARGIN + 30);
+  font.text(meta, MARGIN, MARGIN + 30);
 
   doc.setDrawColor(LINE);
   doc.setLineWidth(0.3);
@@ -80,6 +99,7 @@ function drawTitle(doc: JsPDF, title: string, meta: string): number {
 
 function drawRound(
   doc: JsPDF,
+  font: PdfFont,
   top: number,
   number: number,
   round: Round,
@@ -105,17 +125,17 @@ function drawRound(
 
   doc.setFillColor(ACCENT);
   doc.circle(MARGIN + 3.2, y + 3, 3.2, "F");
-  doc.setFont("helvetica", "bold");
+  font.set("bold");
   doc.setFontSize(8.5);
   doc.setTextColor("#ffffff");
-  doc.text(String(number), MARGIN + 3.2, y + 3.1, { align: "center", baseline: "middle" });
+  font.text(String(number), MARGIN + 3.2, y + 3.1, { align: "center", baseline: "middle" });
   doc.setFontSize(13);
   doc.setTextColor(INK);
-  doc.text(t.round(number), MARGIN + 9, y + 3, { baseline: "middle" });
-  doc.setFont("helvetica", "normal");
+  font.text(t.round(number), MARGIN + 9, y + 3, { baseline: "middle" });
+  font.set("normal");
   doc.setFontSize(9);
   doc.setTextColor(MUTED);
-  doc.text(t.pairsCount(round.pairs.filter((pair) => pair.length === 2).length), PAGE_W - MARGIN, y + 3, { align: "right", baseline: "middle" });
+  font.text(t.pairsCount(round.pairs.filter((pair) => pair.length === 2).length), PAGE_W - MARGIN, y + 3, { align: "right", baseline: "middle" });
   y += headingH;
 
   round.pairs.forEach((pair, index) => {
@@ -128,15 +148,15 @@ function drawRound(
     }
     const x = MARGIN + (index % 2) * (colW + gap);
     const repeated = pair.length === 2 && analysis.repeatedPairs.has(pairKey(pair[0], pair[1]));
-    drawPairTile(doc, x, tileY, colW, tileH, pair, repeated, t);
+    drawPairTile(doc, font, x, tileY, colW, tileH, pair, repeated, t);
   });
   y += rows * (tileH + gap);
 
   if (showNote) {
-    doc.setFont("helvetica", "normal");
+    font.set("normal");
     doc.setFontSize(8.5);
     doc.setTextColor(MUTED);
-    doc.text(fit(doc, t.unassigned(analysis.unassigned), CONTENT_W), MARGIN, y + 2);
+    font.text(fit(doc, t.unassigned(analysis.unassigned), CONTENT_W), MARGIN, y + 2);
     y += noteH;
   }
   return y + 7;
@@ -144,6 +164,7 @@ function drawRound(
 
 function drawPairTile(
   doc: JsPDF,
+  font: PdfFont,
   x: number,
   y: number,
   w: number,
@@ -161,37 +182,37 @@ function drawPairTile(
   const firstX = x + 3 + r;
   // Slight overlap like in the app, while keeping both sets of initials readable.
   const step = r * 1.7;
-  pair.forEach((name, i) => drawAvatar(doc, firstX + i * step, cy, r, name, tile, 6.5));
+  pair.forEach((name, i) => drawAvatar(doc, font, firstX + i * step, cy, r, name, tile, 6.5));
 
   const textX = firstX + step + r + 3;
   const textW = x + w - textX - 3;
   const lineGap = 2.5;
   const drawName = (name: string, dy: number, style: "bold" | "normal", color: string) => {
-    doc.setFont("helvetica", style);
+    font.set(style);
     doc.setTextColor(color);
     let size = 9.5;
     doc.setFontSize(size);
     while (size > 7.5 && doc.getTextWidth(name) > textW) doc.setFontSize((size -= 0.5));
-    doc.text(fit(doc, name, textW), textX, cy + dy, { baseline: "middle" });
+    font.text(fit(doc, name, textW), textX, cy + dy, { baseline: "middle" });
   };
   drawName(pair[0], -lineGap, "bold", repeated ? ALERT : INK);
   if (pair.length === 2) drawName(pair[1], lineGap, "bold", repeated ? ALERT : INK);
   else drawName(t.sitsOutThisRound, lineGap, "normal", MUTED);
 }
 
-function drawAvatar(doc: JsPDF, cx: number, cy: number, r: number, name: string, ring: string, fontSize: number) {
+function drawAvatar(doc: JsPDF, font: PdfFont, cx: number, cy: number, r: number, name: string, ring: string, fontSize: number) {
   const [bg, fg] = PERSON_COLORS[colorIndex(name)];
   doc.setFillColor(bg);
   doc.setDrawColor(ring);
   doc.setLineWidth(0.7);
   doc.circle(cx, cy, r, "FD");
-  doc.setFont("helvetica", "bold");
+  font.set("bold");
   doc.setFontSize(fontSize);
   doc.setTextColor(fg);
-  doc.text(initials(name), cx, cy + 0.1, { align: "center", baseline: "middle" });
+  font.text(initials(name), cx, cy + 0.1, { align: "center", baseline: "middle" });
 }
 
-function drawPersonOverview(doc: JsPDF, top: number, participants: string[], rounds: Round[], t: Messages) {
+function drawPersonOverview(doc: JsPDF, font: PdfFont, top: number, participants: string[], rounds: Round[], t: Messages) {
   const partnersByRound = rounds.map((round) => {
     const partners = new Map<string, string>();
     for (const pair of round.pairs) {
@@ -215,14 +236,14 @@ function drawPersonOverview(doc: JsPDF, top: number, participants: string[], rou
     doc.addPage();
     y = MARGIN;
   }
-  doc.setFont("helvetica", "bold");
+  font.set("bold");
   doc.setFontSize(15);
   doc.setTextColor(INK);
-  doc.text(t.pdfByPerson, MARGIN, y + 4);
-  doc.setFont("helvetica", "normal");
+  font.text(t.pdfByPerson, MARGIN, y + 4);
+  font.set("normal");
   doc.setFontSize(9);
   doc.setTextColor(MUTED);
-  doc.text(t.pdfByPersonHint, MARGIN, y + 10);
+  font.text(t.pdfByPersonHint, MARGIN, y + 10);
   y += 17;
 
   for (let start = 0; start < rounds.length; start += COLUMNS_PER_TABLE) {
@@ -230,12 +251,12 @@ function drawPersonOverview(doc: JsPDF, top: number, participants: string[], rou
     const colW = (CONTENT_W - nameW) / indexes.length;
 
     const drawHeaderRow = () => {
-      doc.setFont("helvetica", "bold");
+      font.set("bold");
       doc.setFontSize(8);
       doc.setTextColor(MUTED);
-      doc.text(t.pdfPerson, MARGIN + 2, y + rowH / 2, { baseline: "middle" });
+      font.text(t.pdfPerson, MARGIN + 2, y + rowH / 2, { baseline: "middle" });
       indexes.forEach((roundIndex, i) => {
-        doc.text(fit(doc, t.round(roundIndex + 1), colW - 3), MARGIN + nameW + i * colW + 1.5, y + rowH / 2, { baseline: "middle" });
+        font.text(fit(doc, t.round(roundIndex + 1), colW - 3), MARGIN + nameW + i * colW + 1.5, y + rowH / 2, { baseline: "middle" });
       });
       doc.setDrawColor(INK);
       doc.setLineWidth(0.4);
@@ -251,10 +272,10 @@ function drawPersonOverview(doc: JsPDF, top: number, participants: string[], rou
 
     people.forEach((person, row) => {
       // Long names wrap onto a second line instead of being cut off; the row grows to fit.
-      doc.setFont("helvetica", "bold");
+      font.set("bold");
       doc.setFontSize(8.5);
       const nameLines = wrap(doc, person, nameW - 10);
-      doc.setFont("helvetica", "normal");
+      font.set("normal");
       const partnerLines = indexes.map((roundIndex) => wrap(doc, partnersByRound[roundIndex].get(person) ?? "–", colW - 3));
       const lineCount = Math.max(nameLines.length, ...partnerLines.map((lines) => lines.length));
       const height = rowH + (lineCount - 1) * LINE_H;
@@ -269,17 +290,17 @@ function drawPersonOverview(doc: JsPDF, top: number, participants: string[], rou
         doc.rect(MARGIN, y, CONTENT_W, height, "F");
       }
       const middle = y + height / 2;
-      drawAvatar(doc, MARGIN + 4, middle, 2.5, person, row % 2 === 0 ? TILE : "#ffffff", 5);
-      doc.setFont("helvetica", "bold");
+      drawAvatar(doc, font, MARGIN + 4, middle, 2.5, person, row % 2 === 0 ? TILE : "#ffffff", 5);
+      font.set("bold");
       doc.setFontSize(8.5);
       doc.setTextColor(INK);
-      drawLines(doc, nameLines, MARGIN + 8, middle);
+      drawLines(font, nameLines, MARGIN + 8, middle);
 
-      doc.setFont("helvetica", "normal");
+      font.set("normal");
       indexes.forEach((roundIndex, i) => {
         const partner = partnersByRound[roundIndex].get(person);
         doc.setTextColor(partner && partner !== "–" ? INK : FAINT);
-        drawLines(doc, partnerLines[i], MARGIN + nameW + i * colW + 1.5, middle);
+        drawLines(font, partnerLines[i], MARGIN + nameW + i * colW + 1.5, middle);
       });
       y += height;
     });
@@ -287,7 +308,7 @@ function drawPersonOverview(doc: JsPDF, top: number, participants: string[], rou
   }
 }
 
-function drawFooters(doc: JsPDF, t: Messages, date: string) {
+function drawFooters(doc: JsPDF, font: PdfFont, t: Messages, date: string) {
   const total = doc.getNumberOfPages();
   for (let page = 1; page <= total; page++) {
     doc.setPage(page);
@@ -295,11 +316,11 @@ function drawFooters(doc: JsPDF, t: Messages, date: string) {
     doc.setDrawColor(LINE);
     doc.setLineWidth(0.3);
     doc.line(MARGIN, y - 4, PAGE_W - MARGIN, y - 4);
-    doc.setFont("helvetica", "normal");
+    font.set("normal");
     doc.setFontSize(8);
     doc.setTextColor(FAINT);
-    doc.text(`${t.pdfCreatedWith} · ${date}`, MARGIN, y);
-    doc.text(t.pdfPage(page, total), PAGE_W - MARGIN, y, { align: "right" });
+    font.text(`${t.pdfCreatedWith} · ${date}`, MARGIN, y);
+    font.text(t.pdfPage(page, total), PAGE_W - MARGIN, y, { align: "right" });
   }
 }
 
@@ -323,9 +344,9 @@ function wrap(doc: JsPDF, text: string, maxWidth: number, maxLines = 3): string[
 }
 
 /** Draws lines vertically centered around `middle`. */
-function drawLines(doc: JsPDF, lines: string[], x: number, middle: number) {
+function drawLines(font: PdfFont, lines: string[], x: number, middle: number) {
   const top = middle - ((lines.length - 1) * LINE_H) / 2;
-  lines.forEach((line, i) => doc.text(line, x, top + i * LINE_H, { baseline: "middle" }));
+  lines.forEach((line, i) => font.text(line, x, top + i * LINE_H, { baseline: "middle" }));
 }
 
 /** Shortens text with an ellipsis so it fits the given width at the current font settings. */

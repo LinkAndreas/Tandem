@@ -11,12 +11,14 @@ import type { Pair } from "./rounds";
  *   Anna M. & Clara S.
  *   David L.            ← a single name sits out
  *
- * Rounds are separated by blank lines or heading lines ("Runde 2", "Round 2", "# …", "---").
- * Names within a pair may be separated by & + , ; / tab or a spaced dash.
+ * Rounds are separated by blank lines or heading lines ("Runde 2", "Round 2", "Раунд 2", "第 2 轮", "# …", "---"),
+ * i.e. what `round(n)` produces in any language. Names within a pair may be separated by & + , ; / tab or a
+ * spaced dash, or by their full-width forms ＆ ＋ 、 ， ； ／ used with CJK input.
  */
 
-const SEPARATOR = /\s*(?:&|\+|,|;|\/|\t|\s[-–—]\s)\s*/;
-const HEADING = /^(?:#.*|-{3,}|(?:runde|round|tour|ronda)\s*\d*\s*:?)$/i;
+const SEPARATOR = /\s*(?:[&+,;/\t＆＋、，；／]|\s[-–—]\s)\s*/;
+const HEADING =
+  /^(?:#.*|-{3,}|(?:runde|round|tour|ronda|turno|rodada|ronde|раунд|ラウンド|라운드)\s*\d*\s*[:：]?|第\s*\d*\s*(?:轮|輪)\s*[:：]?)$/iu;
 
 export type RoundTextIssue =
   | { kind: "tooManyNames"; line: number }

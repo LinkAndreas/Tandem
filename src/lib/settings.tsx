@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { DEFAULT_LOCALE, LOCALES, MESSAGES, type Locale, type Messages } from "./i18n";
+import { LOCALES, MESSAGES, detectLocale, type Locale, type Messages } from "./i18n";
 
 export type Theme = "system" | "light" | "dark";
 
@@ -18,15 +18,18 @@ type SettingsContextValue = Settings & {
 
 const SettingsContext = createContext<SettingsContextValue | null>(null);
 
+/** Without a saved choice, Tandem starts in the browser's language (else German). */
+const browserLocale = () => detectLocale(navigator.languages?.length ? navigator.languages : [navigator.language]);
+
 function loadSettings(): Settings {
   try {
     const stored = JSON.parse(window.localStorage.getItem(SETTINGS_KEY) ?? "{}") as Partial<Settings>;
     return {
-      locale: LOCALES.includes(stored.locale as Locale) ? (stored.locale as Locale) : DEFAULT_LOCALE,
+      locale: LOCALES.includes(stored.locale as Locale) ? (stored.locale as Locale) : browserLocale(),
       theme: stored.theme === "light" || stored.theme === "dark" ? stored.theme : "system",
     };
   } catch {
-    return { locale: DEFAULT_LOCALE, theme: "system" };
+    return { locale: browserLocale(), theme: "system" };
   }
 }
 
